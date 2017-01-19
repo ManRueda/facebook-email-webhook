@@ -37,7 +37,7 @@ module.exports = (ctx, req, res) => {
         let emailOnMessage = change.message.match(emailRegex)
         if (emailOnMessage) {
           let emailAddress = emailOnMessage[0].toLocaleLowerCase().split(' ').join('')
-          var link = `https://www.facebook.com/buenosaireschat/posts/${pureId(change.post_id)}?comment_id=${pureId(change.comment_id)}`
+          var link = `https://www.facebook.com/${ctx.secrets.pageid}/posts/${pureId(change.post_id)}?comment_id=${pureId(change.comment_id)}`
           saveEmail(emailAddress, link, db).then(() => {
             console.log(`new email: "${emailAddress}" on ${link}`)
             returnOk()
